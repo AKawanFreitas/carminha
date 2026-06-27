@@ -1,0 +1,305 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  width: 460px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  animation: fadeIn 0.22s ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.closeBtn:hover {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+/* Summary card */
+.summaryCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.summaryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summaryLabel {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.summaryTotal {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 12px 0;
+}
+
+.breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.breakdownItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bBadge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.bSem {
+  background: var(--badge-nocar-bg);
+  color: var(--badge-nocar-text);
+}
+
+.bPendente {
+  background: var(--badge-pending-bg);
+  color: var(--badge-pending-text);
+}
+
+.bCancelado {
+  background: var(--badge-cancelled-bg);
+  color: var(--badge-cancelled-text);
+}
+
+.bNotificado {
+  background: var(--badge-notificado-bg);
+  color: var(--badge-notificado-text);
+}
+
+.bAtivo {
+  background: var(--badge-active-bg);
+  color: var(--badge-active-text);
+}
+
+.bCount {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.noSelection {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Countdown */
+.countdownSection {
+  background: #fff8e1;
+  border: 1.5px solid #f59e0b;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+
+.countdownRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.countdownText {
+  font-size: 13px;
+  font-weight: 500;
+  color: #92400e;
+}
+
+.countdownNum {
+  font-size: 20px;
+  font-weight: 800;
+  color: #92400e;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-serif);
+}
+
+.countdownTrack {
+  height: 5px;
+  background: #fde68a;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.countdownBar {
+  height: 100%;
+  background: #f59e0b;
+  border-radius: 99px;
+  transition: width 0.9s linear;
+}
+
+/* Canal section */
+.canalSection {
+  margin-bottom: 24px;
+}
+
+.canalLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.canalGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.canalBtn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.canalBtn:hover {
+  border-color: var(--green-dark);
+  color: var(--green-dark);
+  background: #f0fdf4;
+}
+
+.canalActive {
+  background: var(--badge-active-bg) !important;
+  border-color: var(--green-dark) !important;
+  color: var(--green-dark) !important;
+}
+
+.canalIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btnCancel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btnCancel:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+.countdownBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 20px;
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.btnConfirm {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 8px;
+  background: var(--green-dark);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnConfirm:hover:not(:disabled) {
+  background: var(--yellow-lime);
+  color: var(--green-dark);
+  transform: scale(1.02);
+}
+
+.btnConfirm:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
