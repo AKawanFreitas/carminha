@@ -71,10 +71,10 @@ export default function Sidebar({ activeItem = 'produtores', onNavigate, onLogou
       <div className={styles.divider}/>
 
       <div className={styles.profile}>
-        <div className={styles.avatar}>RM</div>
+        <div className={styles.avatar}>LC</div>
         <div className={styles.profileInfo}>
-          <span className={styles.profileName}>Rafael Monteiro</span>
-          <span className={styles.profileRole}>Analista Ambiental Sênior</span>
+          <span className={styles.profileName}>Luciana Carvalho</span>
+          <span className={styles.profileRole}>Gestora de Regularização CAR</span>
         </div>
         <button className={styles.logoutBtn} onClick={onLogout} title="Sair">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
