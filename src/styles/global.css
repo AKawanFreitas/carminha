@@ -22,8 +22,8 @@
   --badge-notificado-bg: #eff6ff;
   --badge-notificado-text: #1d4ed8;
 
-  --topbar-height: 56px;
-  --sidebar-width: 220px;
+  --topbar-height: 0px;
+  --sidebar-width: 260px;
 
   --font-serif: 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;

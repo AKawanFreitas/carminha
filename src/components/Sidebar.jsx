@@ -70,9 +70,20 @@ const navItems = [
   },
 ]
 
-export default function Sidebar({ activeItem = 'produtores', onNavigate }) {
+export default function Sidebar({ activeItem = 'produtores', onNavigate, onLogout }) {
   return (
     <aside className={styles.sidebar}>
+
+      <div className={styles.logoArea}>
+        <img src="/carminha.png" alt="CARminha" className={styles.logoImg} />
+        <div className={styles.logoText}>
+          <span className={styles.logoName}>CARminha</span>
+          <span className={styles.logoSub}>GOV · CAR</span>
+        </div>
+      </div>
+
+      <div className={styles.divider}/>
+
       <nav className={styles.nav}>
         {navItems.map((item) => (
           <button
@@ -82,33 +93,48 @@ export default function Sidebar({ activeItem = 'produtores', onNavigate }) {
           >
             <span className={styles.icon}>{item.icon}</span>
             <span className={styles.label}>{item.label}</span>
+            {activeItem === item.id && (
+              <span className={styles.activeDot}/>
+            )}
           </button>
         ))}
       </nav>
 
+      <div className={styles.spacer}/>
+
+      <div className={styles.divider}/>
+
+      <div className={styles.profile}>
+        <div className={styles.avatar}>RM</div>
+        <div className={styles.profileInfo}>
+          <span className={styles.profileName}>Rafael Monteiro</span>
+          <span className={styles.profileRole}>Analista Ambiental Sênior</span>
+        </div>
+        <button className={styles.logoutBtn} onClick={onLogout} title="Sair">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" strokeWidth="2"
+               strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </button>
+      </div>
+
       <div className={styles.footer}>
         <div className={styles.configBtn}>
           <span className={styles.icon}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path
-                fillRule="evenodd"
-                d="M6.5 1a.5.5 0 01.49.4l.22 1.1a4.5 4.5 0 011.05.44l1-.56a.5.5 0 01.63.1l1.41 1.41a.5.5 0 01.1.63l-.56 1a4.5 4.5 0 01.44 1.05l1.1.22a.5.5 0 01.4.49v2a.5.5 0 01-.4.49l-1.1.22a4.5 4.5 0 01-.44 1.05l.56 1a.5.5 0 01-.1.63l-1.41 1.41a.5.5 0 01-.63.1l-1-.56a4.5 4.5 0 01-1.05.44l-.22 1.1a.5.5 0 01-.49.4h-2a.5.5 0 01-.49-.4l-.22-1.1a4.5 4.5 0 01-1.05-.44l-1 .56a.5.5 0 01-.63-.1L.7 12.57a.5.5 0 01-.1-.63l.56-1A4.5 4.5 0 01.72 9.9L-.38 9.5A.5.5 0 01 0 9V7a.5.5 0 01.4-.49l1.1-.22a4.5 4.5 0 01.44-1.05l-.56-1a.5.5 0 01.1-.63L2.89 2.2a.5.5 0 01.63-.1l1 .56a4.5 4.5 0 011.05-.44l.22-1.1A.5.5 0 016.5 0h2zM5.5 8a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0z"
-                clipRule="evenodd"
-                opacity="0"
-              />
-              <circle cx="8" cy="8" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.3" />
-              <path
-                d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M12.95 3.05l-1.06 1.06M4.11 11.89l-1.06 1.06"
-                stroke="currentColor"
-                strokeWidth="1.3"
-                strokeLinecap="round"
-              />
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+              <circle cx="8" cy="8" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.3"/>
+              <path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M12.95 3.05l-1.06 1.06M4.11 11.89l-1.06 1.06"
+                stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
             </svg>
           </span>
           <span className={styles.label}>Configurações</span>
         </div>
         <span className={styles.version}>v2.4.1 · SICAR</span>
       </div>
+
     </aside>
   )
 }

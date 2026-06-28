@@ -1,8 +1,6 @@
 .sidebar {
   position: fixed;
-  top: var(--topbar-height);
-  left: 0;
-  bottom: 0;
+  top: 0; left: 0; bottom: 0;
   width: var(--sidebar-width);
   background: #ffffff;
   border-right: 1px solid #e5e7eb;
@@ -11,19 +9,53 @@
   z-index: 900;
 }
 
-.nav {
-  flex: 1;
-  padding: 12px 8px;
+/* Logo */
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 14px;
+}
+.logoImg {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+}
+.logoText {
   display: flex;
   flex-direction: column;
   gap: 1px;
 }
+.logoName {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1A6B2A;
+  letter-spacing: -0.3px;
+  line-height: 1;
+}
+.logoSub {
+  font-size: 10px;
+  color: #9ca3af;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.divider { height: 1px; background: #f3f4f6; }
+
+/* Nav */
+.nav {
+  padding: 10px 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 
 .navItem {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 9px 12px;
+  gap: 10px;
+  padding: 10px 12px;
   border: none;
   background: transparent;
   color: #6b7280;
@@ -32,55 +64,116 @@
   text-align: left;
   font-size: 13px;
   font-weight: 500;
-  border-radius: 7px;
+  border-radius: 8px;
   transition: background 0.15s, color 0.15s;
 }
-
 .navItem:hover {
-  background: #f3f4f6;
+  background: #f9fafb;
   color: #0f1117;
 }
-
 .navItem.active {
   background: #e6f4ea;
   color: #1A6B2A;
   font-weight: 600;
 }
 
+.activeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1A6B2A;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 .icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
   width: 16px;
   height: 16px;
+  flex-shrink: 0;
 }
-
 .label { flex: 1; }
 
+.spacer { flex: 1; }
+
+/* Perfil */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+}
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #1A6B2A;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+.profileName {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #0f1117;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.profileRole {
+  font-size: 10.5px;
+  color: #9ca3af;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.logoutBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  transition: color 0.15s, background 0.15s;
+}
+.logoutBtn:hover { color: #0f1117; background: #f3f4f6; }
+
+/* Footer */
 .footer {
-  padding: 8px 8px 12px;
-  border-top: 1px solid #e5e7eb;
+  padding: 4px 10px 14px;
   display: flex;
   flex-direction: column;
   gap: 1px;
 }
-
 .configBtn {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
   padding: 9px 12px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12.5px;
   color: #9ca3af;
-  border-radius: 7px;
+  border-radius: 8px;
   cursor: default;
+  font-weight: 500;
 }
-
 .version {
   font-size: 10px;
   color: #d1d5db;
-  padding: 2px 12px;
-  font-weight: 500;
+  padding: 1px 12px;
 }

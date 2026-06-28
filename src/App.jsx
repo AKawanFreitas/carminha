@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react'
-import Topbar from './components/Topbar'
 import Sidebar from './components/Sidebar'
 import StatsCards from './components/StatsCards'
 import ProdutoresTable from './components/ProdutoresTable'
@@ -109,8 +108,7 @@ export default function App() {
 
   return (
     <>
-      <Topbar onLogout={() => setIsLoggedIn(false)} />
-      <Sidebar activeItem={currentPage} onNavigate={setCurrentPage} />
+      <Sidebar activeItem={currentPage} onNavigate={setCurrentPage} onLogout={() => setIsLoggedIn(false)} />
 
       <main className={styles.main}>
         {currentPage === 'painel' ? (
