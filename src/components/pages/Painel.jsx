@@ -1,7 +1,6 @@
 import {
-  PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer,
-  BarChart, Bar, XAxis, YAxis, CartesianGrid,
-  AreaChart, Area,
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  Tooltip, ResponsiveContainer,
 } from 'recharts'
 import { propriedades } from '../../data/propriedades'
 import styles from './Painel.module.css'
@@ -93,30 +92,6 @@ function MetricCard({ label, value, metaKey }) {
   )
 }
 
-function RadialProgress({ value }) {
-  const r = 52
-  const circ = 2 * Math.PI * r
-  const filled = (value / 100) * circ
-  return (
-    <svg width="148" height="148" viewBox="0 0 148 148" className={styles.radialSvg}>
-      <circle cx="74" cy="74" r={r} fill="none" stroke="#e5e7eb" strokeWidth="10" />
-      <circle
-        cx="74" cy="74" r={r}
-        fill="none"
-        stroke="#10b981"
-        strokeWidth="10"
-        strokeDasharray={`${filled} ${circ}`}
-        strokeLinecap="round"
-        transform="rotate(-90 74 74)"
-        className={styles.radialFill}
-      />
-      <text x="74" y="68" textAnchor="middle" fontSize="28" fontWeight="800" fill="#1c1c1c" fontFamily="inherit">{value}%</text>
-      <text x="74" y="88" textAnchor="middle" fontSize="11" fill="#9ca3af" fontFamily="inherit">regularizados</text>
-    </svg>
-  )
-}
-
-
 function EmptyState() {
   return (
     <div className={styles.emptyWrap}>
@@ -154,68 +129,114 @@ export default function PainelPage({ produtores, notificacoesEnviadas }) {
 
   return (
     <>
-      <nav className={styles.breadcrumb}>
-        <span>CARminha</span>
-        <span className={styles.breadSep}>/</span>
-        <span className={styles.breadActive}>Painel</span>
-      </nav>
-
       <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>Painel</h1>
-        <p className={styles.pageSubtitle}>Visão geral do Cadastro Ambiental Rural no estado.</p>
+        <div>
+          <h1 className={styles.pageTitle}>Painel</h1>
+          <p className={styles.pageSubtitle}>
+            Visão geral do Cadastro Ambiental Rural no estado.
+          </p>
+        </div>
       </div>
 
-      <div className={styles.statsGrid}>
-        <MetricCard label="Produtores carregados" value={total}                metaKey="produtores"   />
-        <MetricCard label="Total de propriedades" value={propriedades.length}  metaKey="propriedades" />
-        <MetricCard label="Notificações enviadas" value={notificacoesEnviadas} metaKey="notificacoes" />
-        <MetricCard label="Taxa de regularização" value={`${taxa}%`}           metaKey="taxa"         />
+      {/* KPIs */}
+      <div className={styles.kpiRow}>
+        <div className={styles.kpiCard}>
+          <span className={styles.kpiValue}>{total}</span>
+          <span className={styles.kpiLabel}>Produtores</span>
+          <div className={styles.kpiBorder} style={{ background: '#6b7280' }}/>
+        </div>
+        <div className={styles.kpiCard}>
+          <span className={styles.kpiValue}>{propriedades.length}</span>
+          <span className={styles.kpiLabel}>Propriedades</span>
+          <div className={styles.kpiBorder} style={{ background: '#1A6B2A' }}/>
+        </div>
+        <div className={styles.kpiCard}>
+          <span className={styles.kpiValue}>{notificacoesEnviadas}</span>
+          <span className={styles.kpiLabel}>Notificações enviadas</span>
+          <div className={styles.kpiBorder} style={{ background: '#3b82f6' }}/>
+        </div>
+        <div className={styles.kpiCard}>
+          <span className={`${styles.kpiValue} ${styles.kpiGreen}`}>{taxa}%</span>
+          <span className={styles.kpiLabel}>Taxa de regularização</span>
+          <div className={styles.kpiBorder} style={{ background: '#10b981' }}/>
+        </div>
       </div>
 
-      <div className={styles.chartsRow}>
-        <div className={styles.chartCard}>
-          <h2 className={styles.chartTitle}>Produtores por status</h2>
-          <div className={styles.pieWrap}>
-            <ResponsiveContainer width="100%" height={260}>
-              <PieChart>
-                <Pie
-                  data={pieData}
-                  cx="50%"
-                  cy="46%"
-                  innerRadius={68}
-                  outerRadius={98}
-                  paddingAngle={3}
-                  dataKey="value"
-                >
-                  {pieData.map((entry, i) => (
-                    <Cell key={i} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip
-                  formatter={(value, name) => [value, name]}
-                  contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,.08)' }}
+      {/* Status bars */}
+      <div className={styles.statusSection}>
+        <h2 className={styles.sectionTitle}>Produtores por status</h2>
+        <div className={styles.statusBars}>
+          {pieData.map((d) => (
+            <div key={d.name} className={styles.statusRow}>
+              <span className={styles.statusName}>{d.name}</span>
+              <div className={styles.statusTrack}>
+                <div
+                  className={styles.statusFill}
+                  style={{
+                    width: `${(d.value / total) * 100}%`,
+                    background: d.color,
+                  }}
                 />
-                <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 12 }} />
-              </PieChart>
-            </ResponsiveContainer>
-            <div className={styles.pieCenter}>
-              <span className={styles.pieCenterNum}>{total}</span>
-              <span className={styles.pieCenterLabel}>produtores</span>
+              </div>
+              <span className={styles.statusCount}>{d.value}</span>
             </div>
-          </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Charts */}
+      <div className={styles.chartsGrid}>
+
+        <div className={styles.chartCard}>
+          <h2 className={styles.chartTitle}>Notificações por mês</h2>
+          <ResponsiveContainer width="100%" height={200}>
+            <LineChart
+              data={LINE_DATA}
+              margin={{ left: 0, right: 16, top: 8, bottom: 4 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" vertical={false}/>
+              <XAxis
+                dataKey="mes"
+                tick={{ fontSize: 11, fill: '#9ca3af' }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <YAxis
+                tick={{ fontSize: 11, fill: '#9ca3af' }}
+                axisLine={false}
+                tickLine={false}
+                allowDecimals={false}
+                width={28}
+              />
+              <Tooltip
+                contentStyle={{
+                  fontSize: 12, borderRadius: 6,
+                  border: '1px solid #e5e7eb',
+                  boxShadow: 'none'
+                }}
+                formatter={(v) => [v, 'Notificações']}
+              />
+              <Line
+                type="monotone"
+                dataKey="notificacoes"
+                stroke="#1A6B2A"
+                strokeWidth={2}
+                dot={{ fill: '#1A6B2A', r: 3, strokeWidth: 0 }}
+                activeDot={{ fill: '#1A6B2A', r: 5, strokeWidth: 0 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
 
-        <div className={`${styles.chartCard} ${styles.chartCardWide}`}>
-          <h2 className={styles.chartTitle}>Propriedades por município — top 8</h2>
-          <ResponsiveContainer width="100%" height={260}>
-            <BarChart data={TOP_MUNICIPIOS} layout="vertical" margin={{ left: 4, right: 24, top: 4, bottom: 4 }}>
-              <defs>
-                <linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#2B4A10" />
-                  <stop offset="100%" stopColor="#5a8c28" />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f3f4f6" />
+        <div className={styles.chartCard}>
+          <h2 className={styles.chartTitle}>Propriedades por município</h2>
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart
+              data={TOP_MUNICIPIOS}
+              layout="vertical"
+              margin={{ left: 0, right: 16, top: 4, bottom: 4 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f3f4f6"/>
               <XAxis
                 type="number"
                 tick={{ fontSize: 11, fill: '#9ca3af' }}
@@ -227,60 +248,29 @@ export default function PainelPage({ produtores, notificacoesEnviadas }) {
                 type="category"
                 dataKey="municipio"
                 width={130}
-                tick={{ fontSize: 12, fill: '#374151' }}
+                tick={{ fontSize: 11, fill: '#374151' }}
                 axisLine={false}
                 tickLine={false}
               />
               <Tooltip
-                cursor={{ fill: 'rgba(43,74,16,0.06)' }}
-                contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,.08)' }}
+                contentStyle={{
+                  fontSize: 12, borderRadius: 6,
+                  border: '1px solid #e5e7eb',
+                  boxShadow: 'none'
+                }}
                 formatter={(v) => [v, 'Propriedades']}
+                cursor={{ fill: '#f0fdf4' }}
               />
-              <Bar dataKey="count" name="Propriedades" fill="url(#barGrad)" radius={[0, 6, 6, 0]} activeBar={{ fill: '#C4A020' }} />
+              <Bar
+                dataKey="count"
+                fill="#1A6B2A"
+                radius={[0, 4, 4, 0]}
+                activeBar={{ fill: '#2E7D3A' }}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>
-      </div>
 
-      <div className={styles.chartsRow}>
-        <div className={`${styles.chartCard} ${styles.chartCardWide}`}>
-          <h2 className={styles.chartTitle}>Notificações enviadas por mês</h2>
-          <ResponsiveContainer width="100%" height={220}>
-            <AreaChart data={LINE_DATA} margin={{ left: 0, right: 24, top: 8, bottom: 4 }}>
-              <defs>
-                <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor="#2B4A10" stopOpacity={0.25} />
-                  <stop offset="95%" stopColor="#2B4A10" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
-              <XAxis dataKey="mes" tick={{ fontSize: 12, fill: '#9ca3af' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 11, fill: '#9ca3af' }} axisLine={false} tickLine={false} allowDecimals={false} />
-              <Tooltip
-                contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e5e7eb', boxShadow: '0 4px 12px rgba(0,0,0,.08)' }}
-                formatter={(v) => [v, 'Notificações']}
-              />
-              <Area
-                type="monotone"
-                dataKey="notificacoes"
-                name="Notificações"
-                stroke="#2B4A10"
-                strokeWidth={2.5}
-                fill="url(#areaGrad)"
-                dot={{ fill: '#2B4A10', r: 4, strokeWidth: 0 }}
-                activeDot={{ fill: '#C4A020', r: 5, stroke: '#2B4A10', strokeWidth: 2 }}
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className={`${styles.chartCard} ${styles.taxaCard}`}>
-          <h2 className={styles.chartTitle}>Taxa de regularização</h2>
-          <div className={styles.taxaBody}>
-            <RadialProgress value={taxa} />
-            <p className={styles.taxaSub}>dos produtores notificados regularizaram o CAR</p>
-          </div>
-        </div>
       </div>
     </>
   )

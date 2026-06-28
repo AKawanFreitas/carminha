@@ -1,189 +1,154 @@
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
-  color: var(--text-secondary);
-  margin-bottom: 24px;
-}
-
-.breadSep { color: var(--border); }
-
-.breadActive {
-  color: var(--text-primary);
-  font-weight: 500;
-}
-
-/* ── Page header ── */
 .pageHeader {
-  margin-bottom: 28px;
-}
-
-.pageTitle {
-  font-family: var(--font-serif);
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.1;
-  margin-bottom: 6px;
-}
-
-.pageSubtitle {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-/* ── Metric cards ── */
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
-.statCard {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--accent, #6b7280);
-  border-radius: 12px;
-  padding: 18px 18px 16px;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-  position: relative;
-}
-
-.statCard:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
-}
-
-.statTop {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f1117;
+  font-family: var(--font-sans);
+  line-height: 1.1;
+  margin-bottom: 3px;
+}
+
+.pageSubtitle {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* KPIs */
+.kpiRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.kpiCard {
+  position: relative;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 18px 18px 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.kpiBorder {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 10px 0 0 10px;
+}
+
+.kpiValue {
+  font-size: 30px;
+  font-weight: 800;
+  color: #0f1117;
+  font-family: var(--font-sans);
+  line-height: 1;
+}
+
+.kpiGreen { color: #1A6B2A; }
+
+.kpiLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #9ca3af;
+}
+
+/* Status bars */
+.statusSection {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 18px 20px;
   margin-bottom: 16px;
 }
 
-.statLabel {
-  font-size: 10.5px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.7px;
-  color: var(--text-secondary);
-  line-height: 1.4;
-  max-width: 100px;
+.sectionTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f1117;
+  margin-bottom: 16px;
 }
 
-.statIcon {
+.statusBars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.statusRow {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
+  gap: 12px;
+}
+
+.statusName {
+  font-size: 12px;
+  color: #374151;
+  font-weight: 500;
+  width: 110px;
   flex-shrink: 0;
-  margin-left: 8px;
 }
 
-.statValue {
-  font-family: var(--font-serif);
-  font-size: 34px;
-  font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1;
-  letter-spacing: -1px;
+.statusTrack {
+  flex: 1;
+  height: 8px;
+  background: #f3f4f6;
+  border-radius: 99px;
+  overflow: hidden;
 }
 
-/* ── Charts layout ── */
-.chartsRow {
-  display: flex;
+.statusFill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s ease;
+  min-width: 4px;
+}
+
+.statusCount {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f1117;
+  width: 24px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Charts */
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 16px;
 }
 
 .chartCard {
-  flex: 1;
   background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px 20px 14px;
-  min-width: 0;
-}
-
-.chartCardWide {
-  flex: 2;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 18px 20px 14px;
 }
 
 .chartTitle {
   font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 700;
+  color: #0f1117;
   margin-bottom: 16px;
-  letter-spacing: -0.1px;
 }
 
-/* ── Donut center overlay ── */
-.pieWrap {
-  position: relative;
-}
-
-.pieCenter {
-  position: absolute;
-  top: calc(46% - 18px);
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  pointer-events: none;
-  line-height: 1.2;
-}
-
-.pieCenterNum {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.pieCenterLabel {
-  font-size: 10px;
-  color: var(--text-secondary);
-}
-
-/* ── Taxa de regularização radial card ── */
-.taxaCard {
-  display: flex;
-  flex-direction: column;
-}
-
-.taxaBody {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  gap: 12px;
-  padding: 8px 0 10px;
-}
-
-.radialSvg {
-  display: block;
-}
-
-.radialFill {
-  transition: stroke-dasharray 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.taxaSub {
-  font-size: 12px;
-  color: var(--text-secondary);
-  text-align: center;
-  line-height: 1.5;
-  max-width: 160px;
-}
-
-/* ── Empty state ── */
+/* Empty */
 .emptyWrap {
   display: flex;
   align-items: center;
@@ -195,20 +160,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-align: center;
 }
 
 .emptyTitle {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #0f1117;
   margin-top: 4px;
 }
 
 .emptySubtitle {
-  font-size: 13.5px;
-  color: var(--text-secondary);
+  font-size: 13px;
+  color: #6b7280;
   max-width: 360px;
-  line-height: 1.6;
+  line-height: 1.55;
 }
