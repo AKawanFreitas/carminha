@@ -164,77 +164,49 @@ export default function PropriedadesPage({ hasLoaded }) {
         </div>
       </div>
 
-      {/* Table */}
-      <div className={styles.tableWrap}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Propriedade</th>
-              <th>Código CAR</th>
-              <th>Proprietário</th>
-              <th>Município · UF</th>
-              <th className={styles.thRight}>Área (ha)</th>
-              <th className={styles.thRight}>Mód. fiscais</th>
-              <th>PRA</th>
-              <th>Status</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.length === 0 ? (
-              <tr>
-                <td colSpan={9} className={styles.emptyRow}>
-                  Nenhuma propriedade encontrada.
-                </td>
-              </tr>
-            ) : (
-              filtered.map((p) => (
-                <tr
-                  key={p.id}
-                  className={styles.row}
-                  onClick={() => setSelectedImovel(p)}
-                >
-                  <td>
-                    <span className={styles.nomeimovel}>{p.nomeimovel}</span>
-                  </td>
-                  <td>
-                    <span
-                      className={styles.carCode}
-                      title={p.codigoimovel ?? 'Sem código CAR'}
-                    >
-                      {p.codigoimovel ?? '—'}
-                    </span>
-                  </td>
-                  <td className={styles.produtor}>{p.nomecadastrante}</td>
-                  <td className={styles.municipio}>
-                    {p.municipio}
-                    <span className={styles.uf}> · {p.uf}</span>
-                  </td>
-                  <td className={styles.tdRight}>
-                    {p.areatotalimovel.toLocaleString('pt-BR', { minimumFractionDigits: 1 })}
-                  </td>
-                  <td className={styles.tdRight}>{p.numeromodulosfiscais}</td>
-                  <td>
-                    {p.aderiupra ? (
-                      <span className={`${styles.praBadge} ${styles.praSimBadge}`}>Sim</span>
-                    ) : (
-                      <span className={`${styles.praBadge} ${styles.praNaoBadge}`}>Não</span>
-                    )}
-                  </td>
-                  <td>
-                    <StatusBadge status={p.statusimovel} />
-                  </td>
-                  <td className={styles.tdChevron}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M6 4l4 4-4 4" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+      <div className={styles.grid}>
+        {filtered.length === 0 ? (
+          <div className={styles.emptyState}>
+            <p className={styles.emptyTitle}>Nenhuma propriedade encontrada.</p>
+          </div>
+        ) : (
+          filtered.map((p) => (
+            <div
+              key={p.id}
+              className={styles.card}
+              onClick={() => setSelectedImovel(p)}
+            >
+              <div className={styles.cardTop}>
+                <StatusBadge status={p.statusimovel} />
+                {p.aderiupra && (
+                  <span className={styles.praBadge}>PRA</span>
+                )}
+              </div>
+
+              <div className={styles.cardNome}>{p.nomeimovel}</div>
+
+              <div className={styles.cardProprietario}>{p.nomecadastrante}</div>
+
+              {p.codigoimovel && (
+                <div className={styles.cardCar}>
+                  <span className={styles.cardCarLabel}>CAR</span>
+                  <span className={styles.cardCarNum}>{p.codigoimovel}</span>
+                </div>
+              )}
+
+              <div className={styles.cardFooter}>
+                <span className={styles.cardMunicipio}>
+                  {p.municipio} · {p.uf}
+                </span>
+                <span className={styles.cardArea}>
+                  {p.areatotalimovel.toLocaleString('pt-BR', { minimumFractionDigits: 1 })} ha
+                </span>
+              </div>
+            </div>
+          ))
+        )}
       </div>
+
       <div className={styles.tableFooter}>
         Exibindo {filtered.length} de {propriedades.length} propriedades
       </div>

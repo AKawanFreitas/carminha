@@ -96,89 +96,76 @@ export default function ProdutoresTable({
         </div>
       </div>
 
-      <div className={styles.tableWrap}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th className={styles.thCheck}>
-                <input
-                  type="checkbox"
-                  className={styles.checkbox}
-                  checked={allSelected}
-                  ref={(el) => { if (el) el.indeterminate = !allSelected && someSelected }}
-                  onChange={() => onToggleAll(filtered.map((p) => p.id))}
-                />
-              </th>
-              <th>Produtor</th>
-              <th>CPF</th>
-              <th>Município</th>
-              <th>Status</th>
-              <th className={styles.thAction} />
-            </tr>
-          </thead>
-          <tbody>
-            {produtores.length === 0 ? (
-              <tr>
-                <td colSpan={6} className={styles.emptyRow}>
-                  <div className={styles.emptyState}>
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                      <circle cx="20" cy="20" r="19" stroke="#d1d5db" strokeWidth="1.5" />
-                      <path d="M20 10v2M20 28v2M10 20h2M28 20h2" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" />
-                      <circle cx="20" cy="20" r="5" stroke="#9ca3af" strokeWidth="1.5" />
-                      <path d="M14 14l2 2M24 24l2 2M24 14l-2 2M16 24l-2 2" stroke="#9ca3af" strokeWidth="1.2" strokeLinecap="round" />
-                    </svg>
-                    <p className={styles.emptyTitle}>Nenhum produtor carregado</p>
-                    <p className={styles.emptySubtitle}>Clique em <strong>Buscar Produtores via API</strong> para importar os dados do SICAR.</p>
-                  </div>
-                </td>
-              </tr>
-            ) : filtered.length === 0 ? (
-              <tr>
-                <td colSpan={6} className={styles.emptyRow}>
-                  Nenhum produtor encontrado.
-                </td>
-              </tr>
-            ) : (
-              filtered.map((produtor) => (
-                <tr
-                  key={produtor.id}
-                  className={`${styles.row} ${selectedIds.has(produtor.id) ? styles.rowSelected : ''}`}
-                  onClick={() => setDrawerProdutor(produtor)}
+      <div className={styles.grid}>
+        {produtores.length === 0 ? (
+          <div className={styles.emptyState}>
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="19" stroke="#d1d5db" strokeWidth="1.5"/>
+              <circle cx="20" cy="20" r="5" stroke="#9ca3af" strokeWidth="1.5"/>
+            </svg>
+            <p className={styles.emptyTitle}>Nenhum produtor carregado</p>
+            <p className={styles.emptySubtitle}>
+              Clique em <strong>Buscar Produtores via API</strong> para importar
+              os dados do SICAR.
+            </p>
+          </div>
+        ) : filtered.length === 0 ? (
+          <div className={styles.emptyState}>
+            <p className={styles.emptyTitle}>Nenhum produtor encontrado.</p>
+          </div>
+        ) : (
+          filtered.map((produtor) => {
+            const isSelected = selectedIds.has(produtor.id)
+            const s = STATUS_MAP[produtor.status]
+            const canaisCount = Object.values(produtor.canais ?? {})
+              .filter(c => c.disponivel).length
+            return (
+              <div
+                key={produtor.id}
+                className={`${styles.card} ${isSelected ? styles.cardSelected : ''}`}
+                onClick={() => setDrawerProdutor(produtor)}
+              >
+                <div
+                  className={styles.cardCheck}
+                  onClick={(e) => { e.stopPropagation(); onToggleSelect(produtor.id) }}
                 >
-                  <td className={styles.tdCheck} onClick={(e) => e.stopPropagation()}>
-                    <input
-                      type="checkbox"
-                      className={styles.checkbox}
-                      checked={selectedIds.has(produtor.id)}
-                      onChange={() => onToggleSelect(produtor.id)}
-                    />
-                  </td>
-                  <td>
-                    <div className={styles.produtorCell}>
-                      <div className={styles.avatar}>{getInitials(produtor.nome)}</div>
-                      <span className={styles.produtorNome}>{produtor.nome}</span>
-                    </div>
-                  </td>
-                  <td className={styles.cpf}>{produtor.cpf}</td>
-                  <td className={styles.municipio}>
-                    {produtor.municipio}
-                    <span className={styles.uf}> · {produtor.uf}</span>
-                  </td>
-                  <td>
-                    <span className={`${styles.badge} ${STATUS_MAP[produtor.status].className}`}>
-                      {STATUS_MAP[produtor.status].label}
+                  <input
+                    type="checkbox"
+                    className={styles.checkbox}
+                    checked={isSelected}
+                    onChange={() => onToggleSelect(produtor.id)}
+                  />
+                </div>
+
+                <div className={styles.cardTop}>
+                  <div className={styles.avatar}>{getInitials(produtor.nome)}</div>
+                  <div className={styles.cardInfo}>
+                    <span className={styles.cardNome}>{produtor.nome}</span>
+                    <span className={styles.cardMunicipio}>
+                      {produtor.municipio} · {produtor.uf}
                     </span>
-                  </td>
-                  <td className={styles.tdAction}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M6 4l4 4-4 4" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+                  </div>
+                </div>
+
+                <span className={`${styles.badge} ${s.className}`}>{s.label}</span>
+
+                <div className={styles.cardMeta}>
+                  <span className={styles.cardCpf}>{produtor.cpf}</span>
+                  <span className={styles.cardCanais}>
+                    {canaisCount} canal{canaisCount !== 1 ? 'is' : ''}
+                  </span>
+                </div>
+
+                {produtor.numeroCar && (
+                  <div className={styles.cardCar}>
+                    <span className={styles.cardCarLabel}>CAR</span>
+                    <span className={styles.cardCarNum}>{produtor.numeroCar}</span>
+                  </div>
+                )}
+              </div>
+            )
+          })
+        )}
       </div>
       <div className={styles.tableFooter}>
         Exibindo {filtered.length} de {produtores.length} produtores

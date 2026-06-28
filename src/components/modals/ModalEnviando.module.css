@@ -19,16 +19,15 @@
 /* ── Modal card ── */
 .modal {
   background: #fff;
-  border-radius: 16px;
-  padding: 44px 52px 36px;
-  width: 360px;
+  border-radius: 10px;
+  padding: 32px 40px 28px;
+  width: 340px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-  /* overflow visible para o envelope voar para fora do card */
-  overflow: visible;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+  overflow: hidden;
   animation: modalIn 0.25s ease;
 }
 
@@ -37,156 +36,23 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Área da animação ── */
-.envelopeArea {
-  position: relative;
-  height: 80px;
-  width: 100%;
+/* ── Icon area ── */
+.iconArea {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: #f0fdf4;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: visible;
-}
-
-/* Scene: origem de todas as peças */
-.scene {
-  position: relative;
-  width: 72px;
-  height: 56px;
-  overflow: visible;
-}
-
-/* ── Envelope principal — 5s em 4 fases ── */
-.envelope {
-  position: absolute;
-  inset: 0;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.18));
-  animation: envelopeJourney 5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
-  transform-origin: center center;
-}
-
-@keyframes envelopeJourney {
-  /* Fase 1 — aparece (0–12%) */
-  0%  { transform: translate(0, 0) scale(0) rotate(0deg);    opacity: 0; }
-  7%  { transform: translate(0, 0) scale(1.08) rotate(-1deg); opacity: 1; }
-  12% { transform: translate(0, 0) scale(1)    rotate(0deg);  opacity: 1; }
-
-  /* Fase 2 — flutua suavemente (12–55%) */
-  20% { transform: translate(0,   -10px) rotate(-1.5deg); }
-  28% { transform: translate(3px,  -2px) rotate(1deg);   }
-  37% { transform: translate(-2px, -8px) rotate(-1deg);  }
-  46% { transform: translate(2px,   0px) rotate(0.5deg); }
-  55% { transform: translate(0,    -7px) rotate(-0.5deg);}
-
-  /* Fase 3 — vibração pré-lançamento (55–70%) */
-  57% { transform: translate(-7px,  0)    rotate(-2.5deg); }
-  59% { transform: translate( 7px,  0)    rotate( 2.5deg); }
-  61% { transform: translate(-6px, -3px)  rotate(-2deg);   }
-  63% { transform: translate( 6px, -6px)  rotate( 2deg);   }
-  65% { transform: translate(-5px, -8px)  rotate(-1.5deg); }
-  67% { transform: translate( 5px, -10px) rotate( 1.5deg); }
-  70% { transform: translate(0,    -13px) scale(1.05) rotate(-4deg); opacity: 1; }
-
-  /* Fase 4 — lançamento (70–100%) */
-  74% { transform: translate( 5vw,  -6vh) scale(0.92) rotate(-8deg);  opacity: 1;   filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1)) blur(0.5px); }
-  83% { transform: translate(24vw, -26vh) scale(0.42) rotate(-15deg); opacity: 0.85; filter: blur(1px);  }
-  92% { transform: translate(42vw, -44vh) scale(0.12) rotate(-19deg); opacity: 0.22; filter: blur(3px);  }
-  100%{ transform: translate(54vw, -56vh) scale(0.01) rotate(-23deg); opacity: 0;    filter: blur(6px);  }
-}
-
-/* ── Rastro 1 ── */
-.ghost1 {
-  position: absolute;
-  inset: 0;
-  animation: ghost1 5s ease-out 0.2s forwards;
-  transform-origin: center center;
-}
-
-@keyframes ghost1 {
-  0%   { transform: translate(0, 0) scale(0.86); opacity: 0; }
-  13%  { opacity: 0.38; transform: translate(-2px, -6px) scale(0.82); }
-  24%  { opacity: 0.28; transform: translate(1px, -11px) scale(0.78); }
-  56%  { opacity: 0.1;  transform: translate(11vw, -11vh) scale(0.22); }
-  68%  { opacity: 0;    }
-  100% { opacity: 0;    }
-}
-
-/* ── Rastro 2 ── */
-.ghost2 {
-  position: absolute;
-  inset: 0;
-  animation: ghost2 5s ease-out 0.2s forwards;
-  transform-origin: center center;
-}
-
-@keyframes ghost2 {
-  0%   { transform: translate(0, 0) scale(0.68); opacity: 0; }
-  12%  { opacity: 0.18; transform: translate(-1px, -3px) scale(0.65); }
-  22%  { opacity: 0.12; transform: translate(0, -6px) scale(0.6); }
-  38%  { opacity: 0;    transform: translate(5vw, -5vh) scale(0.12); }
-  100% { opacity: 0; }
-}
-
-/* ── Partículas (disparam na Fase 4 ~70% = 3.5s + 0.2s delay = 3.7s) ── */
-.spark1, .spark2, .spark3, .spark4 {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0;
-}
-
-.spark1 {
-  width: 7px; height: 7px;
-  background: #C4A020;
-  top: 28px; left: 34px;
-  animation: sparkPop1 0.8s ease-out 3.7s forwards;
-}
-.spark2 {
-  width: 5px; height: 5px;
-  background: #fff;
-  border: 1px solid #d1d5db;
-  top: 22px; left: 18px;
-  animation: sparkPop2 0.7s ease-out 3.75s forwards;
-}
-.spark3 {
-  width: 5px; height: 5px;
-  background: #C4A020;
-  top: 34px; left: 52px;
-  animation: sparkPop3 0.75s ease-out 3.72s forwards;
-}
-.spark4 {
-  width: 4px; height: 4px;
-  background: #fff;
-  border: 1px solid #d1d5db;
-  top: 16px; left: 40px;
-  animation: sparkPop4 0.65s ease-out 3.78s forwards;
-}
-
-@keyframes sparkPop1 {
-  0%   { transform: translate(0,0) scale(0); opacity: 0; }
-  30%  { transform: translate(-14px,-20px) scale(1); opacity: 1; }
-  100% { transform: translate(-24px,-34px) scale(0); opacity: 0; }
-}
-@keyframes sparkPop2 {
-  0%   { transform: translate(0,0) scale(0); opacity: 0; }
-  30%  { transform: translate(-9px,-15px) scale(1); opacity: 0.8; }
-  100% { transform: translate(-16px,-26px) scale(0); opacity: 0; }
-}
-@keyframes sparkPop3 {
-  0%   { transform: translate(0,0) scale(0); opacity: 0; }
-  30%  { transform: translate(12px,-17px) scale(1); opacity: 0.9; }
-  100% { transform: translate(20px,-28px) scale(0); opacity: 0; }
-}
-@keyframes sparkPop4 {
-  0%   { transform: translate(0,0) scale(0); opacity: 0; }
-  30%  { transform: translate(3px,-18px) scale(1); opacity: 0.7; }
-  100% { transform: translate(5px,-30px) scale(0); opacity: 0; }
+  margin: 0 auto;
 }
 
 /* ── Texto ── */
 .text {
   font-size: 15px;
-  font-weight: 500;
-  color: var(--text-primary);
+  font-weight: 600;
+  color: #0f1117;
   letter-spacing: 0.1px;
 }
 
@@ -202,7 +68,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--green-dark);
+  background: #1A6B2A;
   animation: dotBounce 1.2s ease-in-out infinite;
 }
 

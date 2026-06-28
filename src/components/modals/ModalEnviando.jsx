@@ -25,20 +25,13 @@ export default function ModalEnviando({ onComplete }) {
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        {/* Área de animação — overflow: visible para o envelope voar para fora */}
-        <div className={styles.envelopeArea}>
-          <div className={styles.scene}>
-            {/* Rastros */}
-            <div className={styles.ghost2}><EnvelopeSVG /></div>
-            <div className={styles.ghost1}><EnvelopeSVG /></div>
-            {/* Partículas no lançamento */}
-            <div className={styles.spark1} />
-            <div className={styles.spark2} />
-            <div className={styles.spark3} />
-            <div className={styles.spark4} />
-            {/* Envelope principal */}
-            <div className={styles.envelope}><EnvelopeSVG /></div>
-          </div>
+        <div className={styles.iconArea}>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="4" width="20" height="16" rx="2"
+                  stroke="#1A6B2A" strokeWidth="1.5"/>
+            <path d="M2 7l10 7 10-7" stroke="#1A6B2A"
+                  strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
         </div>
 
         <p className={styles.text}>Enviando notificações...</p>

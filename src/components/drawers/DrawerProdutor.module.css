@@ -1,174 +1,162 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 1400;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1500;
+  backdrop-filter: blur(2px);
 }
 
-.drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
+.modal {
+  background: #fff;
+  border-radius: 12px;
   width: 480px;
-  height: 100vh;
-  background: #ffffff;
-  border-left: 1px solid var(--border);
-  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.08);
-  z-index: 1500;
+  max-width: 95vw;
+  max-height: 85vh;
   display: flex;
   flex-direction: column;
-  animation: slideIn 0.24s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.14);
   overflow: hidden;
+  animation: modalIn 0.2s ease;
 }
 
-@keyframes slideIn {
-  from { transform: translateX(100%); }
-  to   { transform: translateX(0); }
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Header ── */
-.drawerHeader {
+.modalHeader {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 22px 24px 18px;
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
+  padding: 20px 20px 16px;
   gap: 12px;
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
 }
 
 .drawerTitleGroup {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
+  flex: 1;
   min-width: 0;
 }
 
 .drawerTitle {
-  font-family: var(--font-serif);
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.25;
+  color: #0f1117;
+  font-family: var(--font-sans);
+  line-height: 1.2;
 }
 
 .drawerCpf {
-  font-family: var(--font-sans);
   font-size: 12px;
   color: #6b7280;
-  letter-spacing: 0.3px;
+  font-family: var(--font-mono);
 }
 
 .drawerMunicipio {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: #9ca3af;
 }
 
-.drawerHeaderRight {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
   flex-shrink: 0;
-  padding-top: 2px;
 }
+
+.badgeAtivo      { background: #dcfce7; color: #15803d; }
+.badgePendente   { background: #fef9c3; color: #854d0e; }
+.badgeSem        { background: #fee2e2; color: #b91c1c; }
+.badgeCancelado  { background: #f3f4f6; color: #374151; }
+.badgeNotificado { background: #eff6ff; color: #1d4ed8; }
 
 .closeBtn {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--text-secondary);
+  color: #9ca3af;
   padding: 4px;
   border-radius: 6px;
   display: flex;
   align-items: center;
-  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+.closeBtn:hover { color: #0f1117; }
+
+.divider {
+  height: 1px;
+  background: #f3f4f6;
 }
 
-.closeBtn:hover {
-  background: var(--surface);
-  color: var(--text-primary);
-}
-
-/* ── Status badges ── */
-.badge {
-  display: inline-block;
-  padding: 3px 9px;
-  border-radius: 20px;
-  font-size: 11.5px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.badgeAtivo      { background: var(--badge-active-bg);    color: var(--badge-active-text); }
-.badgePendente   { background: var(--badge-pending-bg);   color: var(--badge-pending-text); }
-.badgeSem        { background: var(--badge-nocar-bg);     color: var(--badge-nocar-text); }
-.badgeCancelado  { background: var(--badge-cancelled-bg); color: var(--badge-cancelled-text); }
-.badgeNotificado { background: var(--badge-notificado-bg); color: var(--badge-notificado-text); }
-
-/* ── Body ── */
-.drawerBody {
+.modalBody {
   flex: 1;
   overflow-y: auto;
-  padding: 24px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 16px;
 }
 
-/* ── Section ── */
-.section {
-  margin-bottom: 20px;
-}
+.section { display: flex; flex-direction: column; gap: 4px; }
 
 .sectionTitle {
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  color: var(--text-secondary);
-  margin-bottom: 3px;
+  color: #9ca3af;
 }
 
 .sectionSub {
   font-size: 12px;
-  color: var(--text-secondary);
-  margin-bottom: 16px;
+  color: #9ca3af;
+  margin-bottom: 12px;
 }
 
-/* ── Canal list ── */
 .canalList {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  border: 1px solid #f3f4f6;
+  border-radius: 8px;
   overflow: hidden;
 }
 
 .canalItem {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #f3f4f6;
   background: #fff;
   transition: background 0.15s;
 }
-
-.canalItem:last-child {
-  border-bottom: none;
-}
-
-.canalItem:hover {
-  background: var(--surface);
-}
+.canalItem:last-child { border-bottom: none; }
+.canalItem:hover { background: #f9fafb; }
 
 .canalIconWrap {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 8px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: #f9fafb;
+  border: 1px solid #f3f4f6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -178,7 +166,7 @@
 .canalInfo {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   flex: 1;
   min-width: 0;
 }
@@ -186,14 +174,13 @@
 .canalLabel {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #0f1117;
 }
 
 .canalValor {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: #6b7280;
   font-family: monospace;
-  letter-spacing: 0.3px;
 }
 
 .canalMotivo {
@@ -202,37 +189,27 @@
   font-style: italic;
 }
 
-/* ── Disponível badges ── */
 .dispBadge {
   display: inline-block;
-  padding: 2px 9px;
-  border-radius: 20px;
+  padding: 2px 8px;
+  border-radius: 4px;
   font-size: 11px;
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-.dispSim {
-  background: var(--badge-active-bg);
-  color: var(--badge-active-text);
-}
+.dispSim { background: #dcfce7; color: #15803d; }
+.dispNao { background: #f3f4f6; color: #9ca3af; }
 
-.dispNao {
-  background: var(--badge-cancelled-bg);
-  color: #6b7280;
-}
-
-/* ── Encaminhamento ── */
 .encaminhamento {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  background: #fef3c7;
-  border: 1.5px solid #92400e;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
   border-radius: 8px;
-  padding: 14px 16px;
-  margin-top: 4px;
+  padding: 12px 14px;
 }
 
 .encaminhamentoText {

@@ -90,103 +90,112 @@ export default function ModalNotificar({ produtores, selectedIds, onClose, onCon
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.header}>
-          <h2 className={styles.title}>Notificar produtores</h2>
+
+        {/* Topo */}
+        <div className={styles.top}>
+          <div className={styles.topLeft}>
+            <span className={styles.tag}>
+              {selected.length} produtor{selected.length !== 1 ? 'es' : ''}
+            </span>
+            <h2 className={styles.title}>Confirmar notificação</h2>
+          </div>
           <button className={styles.closeBtn} onClick={onClose}>
-            <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
-              <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor"
+                    strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
           </button>
         </div>
 
-        <div className={styles.summaryCard}>
-          <div className={styles.summaryRow}>
-            <span className={styles.summaryLabel}>Total selecionado</span>
-            <span className={styles.summaryTotal}>{selected.length} produtores</span>
-          </div>
-          <div className={styles.divider} />
-          <div className={styles.breakdown}>
-            {counts.sem > 0 && (
-              <div className={styles.breakdownItem}>
-                <span className={`${styles.bBadge} ${styles.bSem}`}>Sem CAR</span>
-                <span className={styles.bCount}>{counts.sem}</span>
-              </div>
-            )}
-            {counts.pendente > 0 && (
-              <div className={styles.breakdownItem}>
-                <span className={`${styles.bBadge} ${styles.bPendente}`}>Pendente</span>
-                <span className={styles.bCount}>{counts.pendente}</span>
-              </div>
-            )}
-            {counts.cancelado > 0 && (
-              <div className={styles.breakdownItem}>
-                <span className={`${styles.bBadge} ${styles.bCancelado}`}>Cancelado</span>
-                <span className={styles.bCount}>{counts.cancelado}</span>
-              </div>
-            )}
-            {counts.notificado > 0 && (
-              <div className={styles.breakdownItem}>
-                <span className={`${styles.bBadge} ${styles.bNotificado}`}>CAR com Notificação</span>
-                <span className={styles.bCount}>{counts.notificado}</span>
-              </div>
-            )}
-            {counts.ativo > 0 && (
-              <div className={styles.breakdownItem}>
-                <span className={`${styles.bBadge} ${styles.bAtivo}`}>CAR Ativo</span>
-                <span className={styles.bCount}>{counts.ativo}</span>
-              </div>
-            )}
-            {selected.length === 0 && (
-              <p className={styles.noSelection}>Nenhum produtor selecionado.</p>
-            )}
-          </div>
+        {/* Breakdown de status em linha */}
+        <div className={styles.breakdown}>
+          {counts.sem > 0 && (
+            <div className={styles.bItem}>
+              <span className={`${styles.bDot} ${styles.dotSem}`}/>
+              <span className={styles.bLabel}>Sem CAR</span>
+              <span className={styles.bNum}>{counts.sem}</span>
+            </div>
+          )}
+          {counts.pendente > 0 && (
+            <div className={styles.bItem}>
+              <span className={`${styles.bDot} ${styles.dotPendente}`}/>
+              <span className={styles.bLabel}>Pendente</span>
+              <span className={styles.bNum}>{counts.pendente}</span>
+            </div>
+          )}
+          {counts.cancelado > 0 && (
+            <div className={styles.bItem}>
+              <span className={`${styles.bDot} ${styles.dotCancelado}`}/>
+              <span className={styles.bLabel}>Cancelado</span>
+              <span className={styles.bNum}>{counts.cancelado}</span>
+            </div>
+          )}
+          {counts.notificado > 0 && (
+            <div className={styles.bItem}>
+              <span className={`${styles.bDot} ${styles.dotNotificado}`}/>
+              <span className={styles.bLabel}>Notificado</span>
+              <span className={styles.bNum}>{counts.notificado}</span>
+            </div>
+          )}
+          {selected.length === 0 && (
+            <span className={styles.emptyMsg}>Nenhum produtor selecionado.</span>
+          )}
         </div>
 
-        {selected.length > 0 && countdown > 0 && (
-          <div className={styles.countdownSection}>
-            <div className={styles.countdownRow}>
-              <span className={styles.countdownText}>Envio automático em</span>
-              <span className={styles.countdownNum}>{countdown}s</span>
-            </div>
-            <div className={styles.countdownTrack}>
-              <div
-                className={styles.countdownBar}
-                style={{ width: `${(countdown / 10) * 100}%` }}
-              />
-            </div>
-          </div>
-        )}
+        <div className={styles.divider}/>
 
+        {/* Canal de envio — lista vertical */}
         <div className={styles.canalSection}>
-          <p className={styles.canalLabel}>Canal de envio</p>
-          <div className={styles.canalGrid}>
+          <span className={styles.canalLabel}>Canal de envio</span>
+          <div className={styles.canalList}>
             {CANAIS.map((c) => (
               <button
                 key={c.id}
-                className={`${styles.canalBtn} ${canais.has(c.id) ? styles.canalActive : ''}`}
+                className={`${styles.canalRow} ${canais.has(c.id) ? styles.canalRowActive : ''}`}
                 onClick={() => toggleCanal(c.id)}
               >
                 <span className={styles.canalIcon}>{c.icon}</span>
-                <span>{c.label}</span>
+                <span className={styles.canalName}>{c.label}</span>
+                <span className={`${styles.check} ${canais.has(c.id) ? styles.checkActive : ''}`}>
+                  {canais.has(c.id) && (
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path d="M2 5l2.5 2.5L8 3" stroke="#fff"
+                            strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
+                </span>
               </button>
             ))}
           </div>
         </div>
 
-        <div className={styles.actions}>
-          <button className={styles.btnCancel} onClick={onClose}>
-            Cancelar {selected.length > 0 && countdown > 0 && (
-              <span className={styles.countdownBadge}>{countdown}s</span>
-            )}
-          </button>
-          <button
-            className={styles.btnConfirm}
-            onClick={onConfirm}
-            disabled={selected.length === 0}
-          >
-            Confirmar envio
-          </button>
+        <div className={styles.divider}/>
+
+        {/* Footer — countdown + ações */}
+        <div className={styles.footer}>
+          {selected.length > 0 && countdown > 0 && (
+            <div className={styles.countdownWrap}>
+              <div className={styles.countdownTrack}>
+                <div className={styles.countdownBar}
+                     style={{ width: `${(countdown / 10) * 100}%` }}/>
+              </div>
+              <span className={styles.countdownNum}>{countdown}s</span>
+            </div>
+          )}
+          <div className={styles.actions}>
+            <button className={styles.btnCancel} onClick={onClose}>
+              Cancelar
+            </button>
+            <button
+              className={styles.btnConfirm}
+              onClick={onConfirm}
+              disabled={selected.length === 0}
+            >
+              Enviar agora
+            </button>
+          </div>
         </div>
+
       </div>
     </div>
   )

@@ -38,29 +38,30 @@ export default function DrawerHistorico({ imovel, onClose }) {
   const active = imovel.declaracoes.find((d) => d.situacao) ?? imovel.declaracoes[0]
 
   return (
-    <>
-      <div className={styles.overlay} onClick={onClose} />
-      <aside className={styles.drawer}>
-        {/* Header */}
-        <div className={styles.drawerHeader}>
-          <div className={styles.drawerTitleGroup}>
-            <h2 className={styles.drawerTitle}>{imovel.nomeimovel}</h2>
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+
+        <div className={styles.modalHeader}>
+          <div className={styles.headerLeft}>
+            <div className={styles.headerTop}>
+              <h2 className={styles.drawerTitle}>{imovel.nomeimovel}</h2>
+              <StatusBadge status={imovel.statusimovel} />
+            </div>
             <span className={styles.drawerCode}>
               {imovel.codigoimovel ?? 'Sem código CAR'}
             </span>
           </div>
-          <div className={styles.drawerHeaderRight}>
-            <StatusBadge status={imovel.statusimovel} />
-            <button className={styles.closeBtn} onClick={onClose} aria-label="Fechar">
-              <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
-                <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-            </button>
-          </div>
+          <button className={styles.closeBtn} onClick={onClose} aria-label="Fechar">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor"
+                    strokeWidth="1.6" strokeLinecap="round"/>
+            </svg>
+          </button>
         </div>
 
-        <div className={styles.drawerBody}>
-          {/* Dados principais da declaração ativa */}
+        <div className={styles.dividerTop}/>
+
+        <div className={styles.modalBody}>
           <section className={styles.section}>
             <p className={styles.sectionTitle}>Declaração ativa</p>
             <div className={styles.dataGrid}>
@@ -99,9 +100,8 @@ export default function DrawerHistorico({ imovel, onClose }) {
             </div>
           </section>
 
-          <div className={styles.divider} />
+          <div className={styles.divider}/>
 
-          {/* Histórico de declarações */}
           <section className={styles.section}>
             <p className={styles.sectionTitle}>Histórico de declarações</p>
             <div className={styles.timeline}>
@@ -116,13 +116,13 @@ export default function DrawerHistorico({ imovel, onClose }) {
                       style={{ background: STATUS_DOT[dec.statusimovel] ?? '#9ca3af' }}
                     />
                     {idx < imovel.declaracoes.length - 1 && (
-                      <div className={styles.timelineLine} />
+                      <div className={styles.timelineLine}/>
                     )}
                   </div>
                   <div className={styles.timelineContent}>
                     <div className={styles.timelineTop}>
                       <span className={styles.timelineVersion}>{dec.codigoversao}</span>
-                      <StatusBadge status={dec.statusimovel} />
+                      <StatusBadge status={dec.statusimovel}/>
                     </div>
                     <div className={styles.timelineMeta}>
                       <span>{dec.nomecadastrante}</span>
@@ -138,7 +138,8 @@ export default function DrawerHistorico({ imovel, onClose }) {
             </div>
           </section>
         </div>
-      </aside>
-    </>
+
+      </div>
+    </div>
   )
 }

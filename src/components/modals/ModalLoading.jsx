@@ -90,12 +90,8 @@ export default function ModalLoading({ onComplete }) {
       <div className={styles.modal}>
         {/* Header */}
         <div className={styles.header}>
-          <div className={styles.iconWrap}>
-            <img src="/carminha.png" alt="CARminha" className={styles.treeIcon} />
-          </div>
-          <div className={styles.headerText}>
-            <span className={styles.brandName}>Buscando produtores</span>
-          </div>
+          <span className={styles.title}>Buscando produtores</span>
+          <span className={styles.subtitle}>Consultando INCRA/SNCR e SICAR...</span>
         </div>
 
         {/* Checklist */}
@@ -107,16 +103,15 @@ export default function ModalLoading({ onComplete }) {
             return (
               <div
                 key={i}
-                className={`${styles.checkItem} ${active ? styles.checkItemActive : ''}`}
+                className={`${styles.checkItem} ${
+                  done   ? styles.checkItemDone   :
+                  active ? styles.checkItemActive : ''
+                }`}
               >
                 <span className={styles.iconSlot}>
                   {done ? <CheckIcon /> : active ? <SpinnerIcon /> : <PendingIcon />}
                 </span>
-                <span
-                  className={`${styles.checkText} ${
-                    done || active ? styles.checkTextDone : styles.checkTextPending
-                  }`}
-                >
+                <span className={`${styles.checkText} ${done ? styles.checkTextDone : ''}`}>
                   {step}
                 </span>
               </div>

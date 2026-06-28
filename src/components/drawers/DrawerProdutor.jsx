@@ -80,30 +80,31 @@ export default function DrawerProdutor({ produtor, onClose }) {
   const nenhumDisponivel = Object.values(canais).every((c) => !c.disponivel)
 
   return (
-    <>
-      <div className={styles.overlay} onClick={onClose} />
-      <aside className={styles.drawer}>
-        {/* Header */}
-        <div className={styles.drawerHeader}>
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+
+        <div className={styles.modalHeader}>
           <div className={styles.drawerTitleGroup}>
-            <h2 className={styles.drawerTitle}>{produtor.nome}</h2>
+            <div className={styles.headerTop}>
+              <h2 className={styles.drawerTitle}>{produtor.nome}</h2>
+              <span className={`${styles.badge} ${status.cls}`}>{status.label}</span>
+            </div>
             <span className={styles.drawerCpf}>{produtor.cpf}</span>
             <span className={styles.drawerMunicipio}>
               {produtor.municipio} · {produtor.uf}
             </span>
           </div>
-          <div className={styles.drawerHeaderRight}>
-            <span className={`${styles.badge} ${status.cls}`}>{status.label}</span>
-            <button className={styles.closeBtn} onClick={onClose} aria-label="Fechar">
-              <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
-                <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-            </button>
-          </div>
+          <button className={styles.closeBtn} onClick={onClose} aria-label="Fechar">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor"
+                    strokeWidth="1.6" strokeLinecap="round"/>
+            </svg>
+          </button>
         </div>
 
-        <div className={styles.drawerBody}>
-          {/* Canais */}
+        <div className={styles.divider}/>
+
+        <div className={styles.modalBody}>
           <section className={styles.section}>
             <p className={styles.sectionTitle}>Canais de contato disponíveis</p>
             <p className={styles.sectionSub}>Informações obtidas via API Gov.br</p>
@@ -115,22 +116,25 @@ export default function DrawerProdutor({ produtor, onClose }) {
             </div>
           </section>
 
-          {/* Encaminhamento — só quando nenhum canal disponível */}
           {nenhumDisponivel && (
             <div className={styles.encaminhamento}>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-                <path d="M8 1l7 13H1L8 1z" fill="#fef3c7" stroke="#92400e" strokeWidth="1.2" strokeLinejoin="round" />
-                <line x1="8" y1="6" x2="8" y2="9.5" stroke="#92400e" strokeWidth="1.3" strokeLinecap="round" />
-                <circle cx="8" cy="11.5" r="0.8" fill="#92400e" />
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                   style={{ flexShrink: 0, marginTop: 2 }}>
+                <path d="M8 1l7 13H1L8 1z" fill="#fef3c7" stroke="#92400e"
+                      strokeWidth="1.2" strokeLinejoin="round"/>
+                <line x1="8" y1="6" x2="8" y2="9.5" stroke="#92400e"
+                      strokeWidth="1.3" strokeLinecap="round"/>
+                <circle cx="8" cy="11.5" r="0.8" fill="#92400e"/>
               </svg>
               <p className={styles.encaminhamentoText}>
-                Nenhum canal de contato disponível. Este produtor será encaminhado para intermediário
-                (EMATER/Sindicato Rural).
+                Nenhum canal de contato disponível. Este produtor será encaminhado
+                para intermediário (EMATER/Sindicato Rural).
               </p>
             </div>
           )}
         </div>
-      </aside>
-    </>
+
+      </div>
+    </div>
   )
 }
