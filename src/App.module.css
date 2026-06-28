@@ -1,7 +1,7 @@
 .main {
   margin-left: var(--sidebar-width);
   margin-top: var(--topbar-height);
-  padding: 28px;
+  padding: 32px 40px;
   min-height: calc(100vh - var(--topbar-height));
   background: var(--bg-primary);
 }
@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-secondary);
   margin-bottom: 20px;
 }
@@ -30,23 +30,24 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   gap: 16px;
 }
 
 .pageTitle {
   font-family: var(--font-serif);
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.1;
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f1117;
+  line-height: 1.2;
   margin-bottom: 4px;
 }
 
 .pageSubtitle {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.6;
+  max-width: 520px;
 }
 
 /* Primary button */
@@ -54,21 +55,19 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 11px 20px;
-  background: var(--green-dark);
+  padding: 10px 20px;
+  background: #1A6B2A;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: all 0.3s ease;
+  transition: background 0.2s ease;
 }
 
 .btnPrimary:hover {
-  background: var(--yellow-lime);
-  color: var(--green-dark);
-  transform: scale(1.02);
+  background: #2E7D3A;
 }

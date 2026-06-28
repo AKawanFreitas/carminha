@@ -1,29 +1,33 @@
 :root {
   --bg-primary: #ffffff;
-  --green-dark: #2B4A10;
-  --green-medium: #3D6B1A;
-  --yellow-lime: #C4A020;
-  --text-primary: #1c1c1c;
+  --bg-secondary: #f9fafb;
+  --surface: #f4f6f8;
+
+  --green-dark: #1A6B2A;
+  --green-medium: #2E7D3A;
+  --green-light: #e6f4ea;
+
+  --text-primary: #0f1117;
   --text-secondary: #6b7280;
   --border: #e5e7eb;
-  --surface: #F3F7EE;
 
-  --badge-active-bg: #d1fae5;
-  --badge-active-text: #065f46;
-  --badge-pending-bg: #fef3c7;
-  --badge-pending-text: #92400e;
+  --badge-active-bg: #dcfce7;
+  --badge-active-text: #15803d;
+  --badge-pending-bg: #fef9c3;
+  --badge-pending-text: #854d0e;
   --badge-nocar-bg: #fee2e2;
-  --badge-nocar-text: #991b1b;
+  --badge-nocar-text: #b91c1c;
   --badge-cancelled-bg: #f3f4f6;
   --badge-cancelled-text: #374151;
-  --badge-notificado-bg: #dbeafe;
-  --badge-notificado-text: #1e40af;
+  --badge-notificado-bg: #eff6ff;
+  --badge-notificado-text: #1d4ed8;
 
-  --topbar-height: 60px;
-  --sidebar-width: 200px;
+  --topbar-height: 56px;
+  --sidebar-width: 220px;
 
   --font-serif: 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 *, *::before, *::after {
@@ -37,7 +41,7 @@ html, body {
   background: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 13.5px;
   -webkit-font-smoothing: antialiased;
 }
 

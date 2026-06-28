@@ -1,7 +1,7 @@
 .wrapper {
-  background: var(--bg-primary);
+  background: #ffffff;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -18,16 +18,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--border);
   gap: 12px;
   flex-wrap: wrap;
+  background: #ffffff;
 }
 
 .toolbarLeft {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   flex: 1;
 }
 
@@ -44,13 +45,13 @@
   font-weight: 500;
   background: var(--badge-active-bg);
   padding: 4px 10px;
-  border-radius: 20px;
+  border-radius: 4px;
 }
 
 .searchWrap {
   position: relative;
   flex: 1;
-  max-width: 320px;
+  max-width: 360px;
 }
 
 .searchIcon {
@@ -65,17 +66,16 @@
   width: 100%;
   padding: 8px 12px 8px 32px;
   border: 1.5px solid var(--border);
-  border-radius: 8px;
-  font-size: 13.5px;
+  border-radius: 6px;
+  font-size: 13px;
   color: var(--text-primary);
-  background: var(--surface);
+  background: #ffffff;
   outline: none;
   transition: border-color 0.2s;
 }
 
 .searchInput:focus {
-  border-color: var(--green-dark);
-  background: #fff;
+  border-color: #1A6B2A;
 }
 
 .searchInput::placeholder {
@@ -85,37 +85,37 @@
 .filterSelect {
   padding: 8px 12px;
   border: 1.5px solid var(--border);
-  border-radius: 8px;
-  font-size: 13.5px;
+  border-radius: 6px;
+  font-size: 13px;
   color: var(--text-primary);
-  background: var(--surface);
+  background: #ffffff;
   outline: none;
   cursor: pointer;
   transition: border-color 0.2s;
 }
 
 .filterSelect:focus {
-  border-color: var(--green-dark);
+  border-color: #1A6B2A;
 }
 
 .btnOutline {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   padding: 8px 16px;
-  border: 1.5px solid var(--green-dark);
-  border-radius: 8px;
+  border: 1.5px solid #1A6B2A;
+  border-radius: 6px;
   background: transparent;
-  color: var(--green-dark);
-  font-size: 13.5px;
-  font-weight: 500;
+  color: #1A6B2A;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
   white-space: nowrap;
 }
 
 .btnOutline:hover {
-  background: #f0fdf4;
+  background: var(--green-light);
 }
 
 /* Table */
@@ -129,28 +129,28 @@
 }
 
 .table thead tr {
-  background: var(--surface);
+  background: #f9fafb;
   border-bottom: 1px solid var(--border);
 }
 
 .table th {
-  padding: 11px 14px;
+  padding: 10px 16px;
   text-align: left;
   font-size: 11px;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-weight: 700;
+  color: #9ca3af;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   white-space: nowrap;
 }
 
 .thCheck {
-  width: 44px;
+  width: 48px;
   text-align: center !important;
 }
 
 .thAction {
-  width: 40px;
+  width: 44px;
 }
 
 .row {
@@ -164,7 +164,7 @@
 }
 
 .row:hover {
-  background: var(--surface);
+  background: #f9fafb;
 }
 
 .rowSelected {
@@ -176,42 +176,42 @@
 }
 
 .table td {
-  padding: 12px 14px;
-  font-size: 13.5px;
+  padding: 13px 16px;
+  font-size: 13px;
   color: var(--text-primary);
   vertical-align: middle;
 }
 
 .tdCheck {
   text-align: center;
-  width: 44px;
+  width: 48px;
 }
 
 .tdAction {
   text-align: center;
-  width: 40px;
+  width: 44px;
 }
 
 .checkbox {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
-  accent-color: var(--green-dark);
+  accent-color: #1A6B2A;
 }
 
 /* Producer cell */
 .produtorCell {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: var(--badge-active-bg);
-  color: var(--badge-active-text);
+  background: var(--green-light);
+  color: #1A6B2A;
   font-size: 11px;
   font-weight: 700;
   display: flex;
@@ -227,7 +227,8 @@
 
 .cpf {
   color: var(--text-secondary);
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -243,10 +244,10 @@
 /* Badges */
 .badge {
   display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -279,15 +280,15 @@
 .emptyRow {
   text-align: center;
   color: var(--text-secondary);
-  padding: 40px !important;
+  padding: 48px !important;
 }
 
 .emptyState {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 20px 0;
+  gap: 12px;
+  padding: 24px 0;
 }
 
 .emptyTitle {
@@ -299,8 +300,8 @@
 .emptySubtitle {
   font-size: 13px;
   color: var(--text-secondary);
-  max-width: 340px;
-  line-height: 1.5;
+  max-width: 360px;
+  line-height: 1.6;
 }
 
 /* Footer */
@@ -309,5 +310,5 @@
   font-size: 12px;
   color: var(--text-secondary);
   border-top: 1px solid var(--border);
-  background: var(--surface);
+  background: #f9fafb;
 }
