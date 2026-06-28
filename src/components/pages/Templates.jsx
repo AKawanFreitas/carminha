@@ -49,70 +49,105 @@ function TemplateCard({ template, onSave }) {
   }
 
   return (
-    <div className={styles.card}>
-      <div className={styles.cardHeader}>
-        <span className={`${styles.badge} ${styles[`badge_${template.badgeStyle}`]}`}>
-          {template.title}
-        </span>
+    <div className={styles.editor}>
+
+      <p className={styles.editorDesc}>{template.description}</p>
+
+      <div className={styles.editorField}>
+        <label className={styles.fieldLabel}>Mensagem</label>
+        <textarea
+          ref={textareaRef}
+          className={styles.textarea}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
       </div>
-      <p className={styles.cardDesc}>{template.description}</p>
-      <textarea
-        ref={textareaRef}
-        className={styles.textarea}
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <div className={styles.variables}>
-        <span className={styles.variablesLabel}>Variáveis disponíveis:</span>
-        {template.variables.map((v) => (
-          <button key={v} className={styles.chip} onClick={() => insertVariable(v)}>
-            {v}
-          </button>
-        ))}
+
+      <div className={styles.variablesSection}>
+        <span className={styles.variablesLabel}>Inserir variável</span>
+        <div className={styles.chips}>
+          {template.variables.map((v) => (
+            <button key={v} className={styles.chip} onClick={() => insertVariable(v)}>
+              {v}
+            </button>
+          ))}
+        </div>
       </div>
-      <div className={styles.cardFooter}>
-        <button className={styles.btnSave} onClick={() => onSave()}>
+
+      <div className={styles.previewSection}>
+        <span className={styles.previewLabel}>Preview</span>
+        <div className={styles.previewBubble}>
+          {text
+            .replace(/\{\{nome\}\}/g, 'João Silva')
+            .replace(/\{\{municipio\}\}/g, 'Sorriso')
+            .replace(/\{\{prazo\}\}/g, '30/07/2026')
+            .replace(/\{\{link_car\}\}/g, 'sicar.gov.br/...')
+            .replace(/\{\{protocolo\}\}/g, 'MT-2024-00123')
+            .replace(/\{\{motivo_cancelamento\}\}/g, 'Documentação incompleta')
+          }
+        </div>
+      </div>
+
+      <div className={styles.editorFooter}>
+        <span className={styles.charCount}>{text.length} caracteres</span>
+        <button className={styles.btnSave} onClick={onSave}>
           Salvar template
         </button>
       </div>
+
     </div>
   )
 }
 
 export default function TemplatesPage() {
   const [toast, setToast] = useState(false)
+  const [activeTab, setActiveTab] = useState('sem')
 
   const handleSave = () => {
     setToast(true)
     setTimeout(() => setToast(false), 3000)
   }
 
+  const activeTemplate = TEMPLATES.find((t) => t.id === activeTab)
+
   return (
     <>
-      <nav className={styles.breadcrumb}>
-        <span>CARminha</span>
-        <span className={styles.breadSep}>/</span>
-        <span className={styles.breadActive}>Templates</span>
-      </nav>
-
       <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>Templates de Mensagem</h1>
-        <p className={styles.pageSubtitle}>
-          Configure as mensagens enviadas automaticamente para cada situação de cadastro.
-        </p>
+        <div>
+          <h1 className={styles.pageTitle}>Templates de Mensagem</h1>
+          <p className={styles.pageSubtitle}>
+            Configure as mensagens enviadas automaticamente para cada situação.
+          </p>
+        </div>
       </div>
 
-      <div className={styles.cards}>
+      <div className={styles.tabs}>
         {TEMPLATES.map((t) => (
-          <TemplateCard key={t.id} template={t} onSave={handleSave} />
+          <button
+            key={t.id}
+            className={`${styles.tab} ${activeTab === t.id ? styles.tabActive : ''}`}
+            onClick={() => setActiveTab(t.id)}
+          >
+            <span className={`${styles.tabDot} ${styles[`dot_${t.badgeStyle}`]}`}/>
+            {t.title}
+          </button>
         ))}
       </div>
 
+      {activeTemplate && (
+        <TemplateCard
+          key={activeTemplate.id}
+          template={activeTemplate}
+          onSave={handleSave}
+        />
+      )}
+
       {toast && (
         <div className={styles.toast}>
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="8" r="7.25" fill="#2B4A10" />
-            <path d="M5 8l2 2 4-4" stroke="#C4A020" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="7.25" fill="#fff" fillOpacity="0.2"/>
+            <path d="M5 8l2 2 4-4" stroke="#fff" strokeWidth="1.6"
+                  strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
           Template salvo com sucesso
         </div>

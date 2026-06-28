@@ -80,12 +80,6 @@ export default function HistoricoMensagensPage({ notificacoesEnviadas }) {
 
   return (
     <>
-      <nav className={styles.breadcrumb}>
-        <span>CARminha</span>
-        <span className={styles.breadSep}>/</span>
-        <span className={styles.breadActive}>Histórico de Mensagens</span>
-      </nav>
-
       <div className={styles.pageHeader}>
         <h1 className={styles.pageTitle}>Histórico de Mensagens</h1>
         <p className={styles.pageSubtitle}>Acompanhe todos os disparos de notificação realizados.</p>
@@ -93,24 +87,18 @@ export default function HistoricoMensagensPage({ notificacoesEnviadas }) {
 
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <div className={styles.statHeader}>
-            <span className={styles.statDot} style={{ background: '#6b7280' }} />
-            <span className={styles.statLabel}>Total de disparos</span>
-          </div>
+          <div className={styles.statBorder} style={{ background: '#6b7280' }}/>
+          <span className={styles.statLabel}>Total de disparos</span>
           <span className={styles.statValue}>{totalDisparos}</span>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statHeader}>
-            <span className={styles.statDot} style={{ background: '#10b981' }} />
-            <span className={styles.statLabel}>Entregues com sucesso</span>
-          </div>
+          <div className={styles.statBorder} style={{ background: '#10b981' }}/>
+          <span className={styles.statLabel}>Entregues com sucesso</span>
           <span className={styles.statValue}>{entregues}</span>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statHeader}>
-            <span className={styles.statDot} style={{ background: '#ef4444' }} />
-            <span className={styles.statLabel}>Falhas no envio</span>
-          </div>
+          <div className={styles.statBorder} style={{ background: '#ef4444' }}/>
+          <span className={styles.statLabel}>Falhas no envio</span>
           <span className={styles.statValue}>{falhas}</span>
         </div>
       </div>
@@ -153,50 +141,51 @@ export default function HistoricoMensagensPage({ notificacoesEnviadas }) {
         </div>
       </div>
 
-      <div className={styles.tableWrap}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Data e hora</th>
-              <th>Produtor</th>
-              <th>Canal</th>
-              <th>Status</th>
-              <th>Motivo da falha</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.length === 0 ? (
-              <tr>
-                <td colSpan={5} className={styles.emptyRow}>
-                  Nenhum registro encontrado.
-                </td>
-              </tr>
-            ) : (
-              filtered.map((d) => (
-                <tr key={d.id} className={styles.row}>
-                  <td className={styles.tdData}>{d.dataHora}</td>
-                  <td className={styles.tdProdutor}>{d.produtor}</td>
-                  <td>
-                    <span className={`${styles.canalBadge} ${CANAL_CLASS[d.canal]}`}>
-                      {d.canal}
-                    </span>
-                  </td>
-                  <td>
-                    {d.status === 'entregue' ? (
-                      <span className={`${styles.badge} ${styles.badgeEntregue}`}>Entregue</span>
-                    ) : (
-                      <span className={`${styles.badge} ${styles.badgeFalha}`}>Falha</span>
-                    )}
-                  </td>
-                  <td className={styles.tdMotivo}>
-                    {d.motivo ?? <span className={styles.noMotivo}>—</span>}
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+      <div className={styles.grid}>
+        {filtered.length === 0 ? (
+          <div className={styles.emptyRow}>Nenhum registro encontrado.</div>
+        ) : (
+          filtered.map((d) => (
+            <div
+              key={d.id}
+              className={`${styles.card} ${d.status === 'falha' ? styles.cardFalha : ''}`}
+            >
+              <div className={styles.cardTop}>
+                <span className={`${styles.canalBadge} ${CANAL_CLASS[d.canal]}`}>
+                  {d.canal}
+                </span>
+                {d.status === 'entregue' ? (
+                  <span className={`${styles.badge} ${styles.badgeEntregue}`}>
+                    Entregue
+                  </span>
+                ) : (
+                  <span className={`${styles.badge} ${styles.badgeFalha}`}>
+                    Falha
+                  </span>
+                )}
+              </div>
+
+              <div className={styles.cardProdutor}>{d.produtor}</div>
+
+              <div className={styles.cardData}>{d.dataHora}</div>
+
+              {d.motivo && (
+                <div className={styles.cardMotivo}>
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 1l7 13H1L8 1z" fill="#fee2e2" stroke="#b91c1c"
+                          strokeWidth="1.2" strokeLinejoin="round"/>
+                    <line x1="8" y1="6" x2="8" y2="9.5" stroke="#b91c1c"
+                          strokeWidth="1.3" strokeLinecap="round"/>
+                    <circle cx="8" cy="11.5" r="0.8" fill="#b91c1c"/>
+                  </svg>
+                  {d.motivo}
+                </div>
+              )}
+            </div>
+          ))
+        )}
       </div>
+
       <div className={styles.tableFooter}>
         Exibindo {filtered.length} de {MOCK_DISPAROS.length} registros
       </div>

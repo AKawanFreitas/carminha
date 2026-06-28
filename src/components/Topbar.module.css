@@ -1,75 +1,75 @@
 .topbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: var(--topbar-height);
   background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 32px;
+  padding: 0 24px;
   z-index: 1000;
-  box-shadow: 0 1px 0 var(--border);
 }
 
 .left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
 }
 
 .logoImg {
-  height: 36px;
+  height: 32px;
   width: auto;
   object-fit: contain;
+  filter: none;
 }
 
 .subtitle {
   font-size: 11px;
-  color: var(--text-secondary);
+  color: #9ca3af;
   font-weight: 500;
-  letter-spacing: 0;
+  letter-spacing: 0.3px;
+  padding-left: 10px;
+  border-left: 1px solid #e5e7eb;
 }
 
 .right {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
 }
 
 .userInfo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .userText {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 2px;
+  gap: 1px;
 }
 
 .userName {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #0f1117;
 }
 
 .userRole {
   font-size: 11px;
-  color: var(--text-secondary);
-  letter-spacing: 0.2px;
+  color: #9ca3af;
 }
 
 .avatar {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: #1A6B2A;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -77,20 +77,25 @@
   flex-shrink: 0;
 }
 
+.divider {
+  width: 1px;
+  height: 20px;
+  background: #e5e7eb;
+}
+
 .logoutBtn {
   background: none;
   border: none;
   cursor: pointer;
-  color: #6b7280;
+  color: #9ca3af;
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 6px;
   border-radius: 6px;
-  transition: color 0.2s, background 0.2s;
-  flex-shrink: 0;
+  transition: color 0.15s, background 0.15s;
 }
 
 .logoutBtn:hover {
   color: #0f1117;
-  background: var(--surface);
+  background: #f3f4f6;
 }

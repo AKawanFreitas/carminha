@@ -5,15 +5,15 @@
   bottom: 0;
   width: var(--sidebar-width);
   background: #ffffff;
+  border-right: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
   z-index: 900;
-  border-right: 1px solid var(--border);
 }
 
 .nav {
   flex: 1;
-  padding: 16px 0 16px;
+  padding: 12px 8px;
   display: flex;
   flex-direction: column;
   gap: 1px;
@@ -22,32 +22,29 @@
 .navItem {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  margin: 0 8px;
+  gap: 9px;
+  padding: 9px 12px;
   border: none;
   background: transparent;
-  color: var(--text-secondary);
+  color: #6b7280;
   cursor: pointer;
-  width: calc(100% - 16px);
+  width: 100%;
   text-align: left;
   font-size: 13px;
-  font-weight: 400;
-  border-radius: 6px;
-  transition: background 0.15s ease, color 0.15s ease;
-  position: relative;
+  font-weight: 500;
+  border-radius: 7px;
+  transition: background 0.15s, color 0.15s;
 }
 
 .navItem:hover {
-  background: var(--surface);
-  color: var(--text-primary);
+  background: #f3f4f6;
+  color: #0f1117;
 }
 
 .navItem.active {
-  background: var(--green-light);
+  background: #e6f4ea;
   color: #1A6B2A;
   font-weight: 600;
-  box-shadow: inset 3px 0 0 #1A6B2A;
 }
 
 .icon {
@@ -57,44 +54,33 @@
   flex-shrink: 0;
   width: 16px;
   height: 16px;
-  opacity: 0.75;
 }
 
-.navItem.active .icon {
-  opacity: 1;
-}
-
-.label {
-  flex: 1;
-  line-height: 1.3;
-}
+.label { flex: 1; }
 
 .footer {
-  padding: 12px 0 16px;
-  border-top: 1px solid var(--border);
+  padding: 8px 8px 12px;
+  border-top: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 1px;
 }
 
 .configBtn {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  margin: 0 8px;
+  gap: 9px;
+  padding: 9px 12px;
   font-size: 13px;
-  font-weight: 400;
-  color: var(--text-secondary);
+  font-weight: 500;
+  color: #9ca3af;
+  border-radius: 7px;
   cursor: default;
-  opacity: 0.5;
-  border-radius: 6px;
 }
 
 .version {
-  font-size: 11px;
-  color: #9ca3af;
-  font-weight: 400;
-  padding: 6px 24px 0;
-  letter-spacing: 0;
+  font-size: 10px;
+  color: #d1d5db;
+  padding: 2px 12px;
+  font-weight: 500;
 }

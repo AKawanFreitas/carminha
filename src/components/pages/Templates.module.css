@@ -1,183 +1,225 @@
-.breadcrumb {
+.pageHeader {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
-  color: var(--text-secondary);
+  align-items: flex-start;
+  justify-content: space-between;
   margin-bottom: 24px;
 }
 
-.breadSep { color: var(--border); }
-
-.breadActive {
-  color: var(--text-primary);
-  font-weight: 500;
-}
-
-.pageHeader {
-  margin-bottom: 32px;
-}
-
 .pageTitle {
-  font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.1;
-  margin-bottom: 6px;
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f1117;
+  font-family: var(--font-sans);
+  margin-bottom: 3px;
 }
 
 .pageSubtitle {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.6;
+  font-size: 13px;
+  color: #6b7280;
 }
 
-.cards {
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+  border-radius: 6px 6px 0 0;
+}
+
+.tab:hover { color: #0f1117; }
+
+.tabActive {
+  color: #1A6B2A;
+  border-bottom-color: #1A6B2A;
+  font-weight: 600;
+}
+
+.tabDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot_sem       { background: #ef4444; }
+.dot_pendente  { background: #f59e0b; }
+.dot_cancelado { background: #9ca3af; }
+
+/* Editor */
+.editor {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.card {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 28px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-}
-
-.cardHeader {
-  margin-bottom: 10px;
-}
-
-.badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.badge_sem {
-  background: var(--badge-nocar-bg);
-  color: var(--badge-nocar-text);
-}
-
-.badge_pendente {
-  background: var(--badge-pending-bg);
-  color: var(--badge-pending-text);
-}
-
-.badge_cancelado {
-  background: var(--badge-cancelled-bg);
-  color: var(--badge-cancelled-text);
-}
-
-.cardDesc {
-  font-size: 13.5px;
-  color: var(--text-secondary);
-  margin-bottom: 14px;
+.editorDesc {
+  font-size: 13px;
+  color: #6b7280;
   line-height: 1.55;
+}
+
+.editorField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #9ca3af;
 }
 
 .textarea {
   width: 100%;
-  min-height: 120px;
+  min-height: 100px;
   resize: vertical;
   padding: 12px 14px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid #e5e7eb;
   border-radius: 8px;
   font-family: var(--font-sans);
-  font-size: 14px;
-  color: var(--text-primary);
-  background: var(--surface);
+  font-size: 13.5px;
+  color: #0f1117;
+  background: #fff;
   line-height: 1.65;
   outline: none;
-  transition: border-color 0.18s;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
 }
+.textarea:focus { border-color: #1A6B2A; }
 
-.textarea:focus {
-  border-color: var(--green-dark);
-}
-
-.variables {
+/* Variáveis */
+.variablesSection {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  margin-top: 10px;
-  margin-bottom: 18px;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .variablesLabel {
-  font-size: 11.5px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
-  margin-right: 2px;
+  letter-spacing: 0.6px;
+  color: #9ca3af;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .chip {
-  background: #EBF0E2;
-  border: 1px solid var(--border);
-  color: var(--green-dark);
-  border-radius: 20px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #1A6B2A;
+  border-radius: 4px;
   font-size: 12px;
-  font-family: var(--font-sans);
-  padding: 4px 11px;
+  font-family: var(--font-mono);
+  padding: 4px 10px;
   cursor: pointer;
   transition: background 0.15s;
+  font-weight: 500;
 }
+.chip:hover { background: #dcfce7; }
 
-.chip:hover {
-  background: #DDE9CC;
-}
-
-.cardFooter {
+/* Preview */
+.previewSection {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.previewLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #9ca3af;
+}
+
+.previewBubble {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 0 10px 10px 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #0f1117;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  max-width: 480px;
+}
+
+/* Footer */
+.editorFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.charCount {
+  font-size: 12px;
+  color: #9ca3af;
 }
 
 .btnSave {
-  padding: 10px 22px;
-  background: var(--green-dark);
+  padding: 10px 20px;
+  background: #1A6B2A;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.15s;
 }
-
-.btnSave:hover {
-  background: var(--yellow-lime);
-  color: var(--green-dark);
-  transform: scale(1.02);
-}
+.btnSave:hover { background: #2E7D3A; }
 
 /* Toast */
 .toast {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
+  bottom: 24px;
+  right: 24px;
   display: flex;
   align-items: center;
-  gap: 9px;
-  background: var(--green-dark);
+  gap: 8px;
+  background: #1A6B2A;
   color: #fff;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
-  padding: 12px 18px;
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-  animation: slideUp 0.25s ease;
+  padding: 11px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+  animation: slideUp 0.2s ease;
   z-index: 3000;
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }

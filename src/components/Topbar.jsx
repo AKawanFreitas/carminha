@@ -26,6 +26,7 @@ export default function Topbar({ onLogout }) {
           </div>
           <div className={styles.avatar}>RM</div>
         </div>
+        <div className={styles.divider}/>
         <button className={styles.logoutBtn} onClick={onLogout} title="Sair">
           <LogoutIcon />
         </button>
